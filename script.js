@@ -2,11 +2,14 @@ const form = document.getElementById("form-tarefa");
 const campo = document.getElementById("campo-tarefa");
 const campoPrioridade = document.getElementById("campo-prioridade");
 const colunas = document.querySelectorAll(".coluna");
+const campoFiltro = document.getElementById("campo-filtro");
+const botaoLimpar = document.getElementById("limpar-concluidos");
 
 const nomesPrioridade = { alta: "Alta", media: "Média", baixa: "Baixa" };
 const pesoPrioridade = { alta: 0, media: 1, baixa: 2 };
 
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+let filtro = "";
 
 function salvar() {
   localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -96,6 +99,7 @@ function renderizar() {
 
     const daColuna = tarefas
       .filter((tarefa) => tarefa.coluna === nome)
+      .filter((tarefa) => tarefa.texto.toLowerCase().includes(filtro))
       .sort((a, b) => pesoPrioridade[a.prioridade || "media"] - pesoPrioridade[b.prioridade || "media"]);
 
     area.innerHTML = "";
@@ -129,6 +133,22 @@ colunas.forEach((coluna) => {
       renderizar();
     }
   });
+});
+
+campoFiltro.addEventListener("input", () => {
+  filtro = campoFiltro.value.trim().toLowerCase();
+  renderizar();
+});
+
+botaoLimpar.addEventListener("click", () => {
+  const concluidas = tarefas.filter((tarefa) => tarefa.coluna === "concluido");
+  if (concluidas.length === 0) return;
+
+  if (confirm(`Remover ${concluidas.length} tarefa(s) concluída(s)?`)) {
+    tarefas = tarefas.filter((tarefa) => tarefa.coluna !== "concluido");
+    salvar();
+    renderizar();
+  }
 });
 
 form.addEventListener("submit", (evento) => {

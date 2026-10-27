@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+      - "feature/**"
+      - "release/**"
+      - "hotfix/**"
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Checar sintaxe do Js
+        run: node --check script.js
+
+      - name: Validar o HTML
+        run: npx --yes htmlhint index.html

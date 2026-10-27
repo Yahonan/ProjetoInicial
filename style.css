@@ -1,0 +1,264 @@
+:root {
+  --fundo: #f4f1fb;
+  --texto: #2a2440;
+  --suave: #7a7394;
+  --card: #ffffff;
+  --borda: #e3def2;
+  --roxo: #6c5ce7;
+  --amarelo: #f5a524;
+  --verde: #17b890;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  color: var(--texto);
+  background: linear-gradient(160deg, #f4f1fb 0%, #e6e9fb 100%);
+  background-attachment: fixed;
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 24px;
+}
+
+.topo h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+#form-tarefa {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+  max-width: 580px;
+}
+
+input,
+select {
+  flex: 1;
+  padding: 12px 16px;
+  font: inherit;
+  color: var(--texto);
+  background: var(--card);
+  border: 2px solid var(--borda);
+  border-radius: 12px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--roxo);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#form-tarefa button {
+  padding: 12px 20px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--roxo);
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#form-tarefa button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(108, 92, 231, 0.35);
+}
+
+:focus-visible {
+  outline: 3px solid var(--roxo);
+  outline-offset: 2px;
+}
+
+.quadro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 20px 48px;
+  align-items: start;
+}
+
+.coluna {
+  --cor: var(--roxo);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid transparent;
+  border-radius: 18px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.coluna[data-coluna="andamento"] {
+  --cor: var(--amarelo);
+}
+
+.coluna[data-coluna="concluido"] {
+  --cor: var(--verde);
+}
+
+.coluna.sobre {
+  background: #fff;
+  border-color: var(--cor);
+  border-style: dashed;
+}
+
+.coluna-topo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--cor);
+}
+
+.coluna-topo h2 {
+  flex: 1;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.contador {
+  min-width: 28px;
+  padding: 2px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  background: var(--cor);
+  border-radius: 999px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 120px;
+}
+
+.cards:empty::before {
+  content: "Arraste tarefas para cá";
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  font-size: 0.9rem;
+  color: var(--suave);
+  border: 2px dashed var(--borda);
+  border-radius: 12px;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--card);
+  border-left: 5px solid var(--cor);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(42, 36, 64, 0.08);
+  cursor: grab;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(42, 36, 64, 0.12);
+}
+
+.card.arrastando {
+  opacity: 0.4;
+}
+
+.card p {
+  flex: 1;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.remover {
+  width: 26px;
+  height: 26px;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--suave);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+}
+
+.remover:hover {
+  color: #fff;
+  background: #e5484d;
+}
+
+@media (max-width: 800px) {
+  .quadro {
+    grid-template-columns: 1fr;
+  }
+}
+
+select {
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.card-corpo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.card-corpo p {
+  width: 100%;
+}
+
+.etiqueta {
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+}
+
+.etiqueta.alta {
+  color: #c2373c;
+  background: #fde8e8;
+}
+
+.etiqueta.media {
+  color: #2f5fd0;
+  background: #e4ecfd;
+}
+
+.etiqueta.baixa {
+  color: #6b6585;
+  background: #eceaf3;
+}
+
+.edicao {
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+}

@@ -262,3 +262,31 @@ select {
   padding: 6px 10px;
   border-radius: 8px;
 }
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 8px;
+}
+
+#campo-filtro {
+  flex: 0 1 320px;
+}
+
+#limpar-concluidos {
+  padding: 12px 18px;
+  font-weight: 700;
+  color: var(--suave);
+  background: transparent;
+  border: 2px solid var(--borda);
+  border-radius: 12px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+#limpar-concluidos:hover {
+  color: var(--roxo);
+  border-color: var(--roxo);
+}

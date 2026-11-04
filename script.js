@@ -1,3 +1,4 @@
+const form = document.getElementById("form-tarefa");
 const campo = document.getElementById("campo-tarefa");
 const campoPrioridade = document.getElementById("campo-prioridade");
 const colunas = document.querySelectorAll(".coluna");

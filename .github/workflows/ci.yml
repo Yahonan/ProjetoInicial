@@ -73,7 +73,7 @@ jobs:
           sleep 3
           curl -sSf http://localhost:8080/ > /dev/null
 
-            - name: Rodar o ZAP baseline scan
+      - name: Rodar o ZAP baseline scan
         run: |
           mkdir -p zap-out && chmod 777 zap-out
           docker run --rm --network host \
